@@ -18,15 +18,15 @@ class Instructor extends People {
     this.specialty = attr.specialty
     this.catchPhrase = attr.catchPhrase
   }
-  demo(subject) { // subject is string
+  demo(subject) {
     return `Today we are learning about ${subject}.`
   }
-  grade(student, subject) { // student is object, subject is string
+  grade(student, subject) {
     return `${student.name} receives a perfect sore on ${subject}`
   }
 }
 
-class Student extends Person {
+class Student extends People {
   constructor(attr) {
     super(attr)
     this.previousBackground = attr.previousBackground
@@ -34,15 +34,13 @@ class Student extends Person {
     this.favSubject = attr.favSubject
   }
   listsSubject() {
-    this.favSubject.map(subject => {
-      console.log(subject)
-    })
+    return this.favSubject.map(subject => subject)
   }
   PRAssignment(subject) {
-    console.log(`${this.name} has submitted a PR for ${subject}`)
+    return `${this.name} has submitted a PR for ${subject}`
   }
   sprintChallenge(subject) {
-    console.log(`${this.name} has begun sprint challenge on ${subject}`)
+    return `${this.name} has begun sprint challenge on ${subject}`
   }
 }
 
@@ -53,10 +51,10 @@ class ProjectManager extends Instructor {
     this.favInstructor = attr.favInstructor
   }
   standUp(channel) {
-    console.log(`${this.name} announces to ${channel}, @${channel} standby times!`)
+    return `${this.name} announces to ${channel}, @${channel} standby times!`
   }
   debugsCode(student, subject) {
-    console.log(`${this.name} debugs ${student.name}'s code on ${subject}`)
+    return `${this.name} debugs ${student.name}'s code on ${subject}`
   }
 }
 
@@ -66,7 +64,7 @@ const becka = new Instructor({
   age: 28,
   favLanguage: 'Go',
   specialty: 'Front-End',
-  catchPhrase: 'Ashes to ashes, dust to side chicks.'
+  catchPhrase: '...Flawless...'
 })
 
 const adrian = new Instructor({
@@ -82,9 +80,9 @@ const blondy = new Student({
   name: 'Blondy',
   location: 'Los Angeles',
   age: 19,
-  favLanguage: 'JavaScript',
-  specialty: 'Fullstack',
-  catchPhrase: "I can't do this but I'm doing it anyway!",
+  // favLanguage: 'JavaScript',
+  // specialty: 'Fullstack',
+  // catchPhrase: "I can't do this but I'm doing it anyway!",
   previousBackground: "hand model",
   className: "WEB21",
   favSubject: ['CSS', 'HTML','JavaScript', 'React']
@@ -94,9 +92,9 @@ const ellis = new Student({
   name: 'Ellis',
   location: 'Denver',
   age: 59,
-  favLanguage: 'Ruby',
-  specialty: 'Back-End',
-  catchPhrase: 'Turn down for what',
+  // favLanguage: 'Ruby',
+  // specialty: 'Back-End',
+  // catchPhrase: 'Turn down for what',
   previousBackground: 'taxodermist',
   className: 'WEB19',
   favSubject: ['Ruby', 'SQL', 'APIs']
@@ -123,3 +121,11 @@ const terrance = new ProjectManager({
   gradClassName: 'CS1',
   favInstructor: 'Dan'
 })
+
+console.log(terrance.catchPhrase)
+console.log(becka.catchPhrase)
+console.log(adrian.specialty)
+console.log(ellis.PRAssignment('JavaScript'))
+console.log(blondy.listsSubject())
+console.log(becka.demo("LESS"))
+console.log(becka.grade(blondy, 'CSS'))
