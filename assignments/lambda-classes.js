@@ -22,7 +22,14 @@ class Instructor extends People {
     return `Today we are learning about ${subject}.`
   }
   grade(student, subject) {
-    return `${student.name} receives a perfect sore on ${subject}`
+    return `${student.name} receives a perfect score on ${subject}`
+  }
+  changeGrade(student) { // STRETCH
+    const prevGrade = student.grade
+    // find smallest difference of grade from 100 or 0, make that the max
+    const max = Math.min(Math.abs(prevGrade - 100), prevGrade)
+    student.grade += Math.floor(Math.random() * (max + 50) - 50)
+    return `${student.name}'s grade has changed from ${prevGrade} to ${student.grade}.`
   }
 }
 
@@ -32,6 +39,7 @@ class Student extends People {
     this.previousBackground = attr.previousBackground
     this.className = attr.className
     this.favSubject = attr.favSubject
+    this.grade = attr.grade
   }
   listsSubject() {
     return this.favSubject.map(subject => subject)
@@ -41,6 +49,9 @@ class Student extends People {
   }
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`
+  }
+  graduate() {
+
   }
 }
 
@@ -85,7 +96,8 @@ const blondy = new Student({
   // catchPhrase: "I can't do this but I'm doing it anyway!",
   previousBackground: "hand model",
   className: "WEB21",
-  favSubject: ['CSS', 'HTML','JavaScript', 'React']
+  favSubject: ['CSS', 'HTML','JavaScript', 'React'],
+  grade: 56
 })
 
 const ellis = new Student({
@@ -97,7 +109,8 @@ const ellis = new Student({
   // catchPhrase: 'Turn down for what',
   previousBackground: 'taxodermist',
   className: 'WEB19',
-  favSubject: ['Ruby', 'SQL', 'APIs']
+  favSubject: ['Ruby', 'SQL', 'APIs'],
+  grade: Math.floor(Math.random() * (100 - 1) - 1)
 })
 
 const joy = new ProjectManager({
@@ -129,3 +142,7 @@ console.log(ellis.PRAssignment('JavaScript'))
 console.log(blondy.listsSubject())
 console.log(becka.demo("LESS"))
 console.log(becka.grade(blondy, 'CSS'))
+
+// STRETCH -
+console.log(becka.changeGrade(ellis))
+console.log(joy.changeGrade(blondy))
